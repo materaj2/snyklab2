@@ -7,9 +7,13 @@ const db = new sqlite3.Database(':memory:');
 
 db.serialize(() => {
   db.run('CREATE TABLE users (id INTEGER PRIMARY KEY, username TEXT, password TEXT)');
-  db.run("INSERT INTO users (username, password) VALUES ('admin', 'password1234!!!')");
+  db.run("INSERT INTO users (username, password) VALUES ('admin', 'password')");
   db.run('CREATE TABLE flags (id INTEGER PRIMARY KEY, flag TEXT)');
-  db.run("INSERT INTO flags (flag) VALUES ('webtool{YJ7d!a4sZP4gXKV3JcKRsK}')");
+  db.run("INSERT INTO flags (flag) VALUES ('webtool{[[GGEZ]]}')");
+});
+
+app.get('/', (req, res) => {
+  res.send('<h1>Welcome to Vulnerable SQLi App!</h1><p>Try to login at <a href="/login?username=admin&password=password">/login</a></p>');
 });
 
 app.get('/login', (req, res) => {
